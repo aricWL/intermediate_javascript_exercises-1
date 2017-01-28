@@ -1,9 +1,6 @@
 const game = new Game();
-game.storePlayer();
-game.getCurrentPlayer();
-
 let boardData = new Board();
-boardData.buildBoard();
+
 
 
 
@@ -12,10 +9,20 @@ boardData.buildBoard();
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    //Start the Game on Load
+    function startGame() {
+        game.storePlayer();
+        game.getCurrentPlayer();
+        boardData.buildBoard();
+    }
+    startGame();
+
+
+
+
     //Event Listener On Board
     //Get the current player
     //Set the innerHTML with the correct Player Piece
-
     let board = document.getElementById('board');
     board.addEventListener('click', function (e) {
         let square = event.target;
@@ -28,6 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
         boardData.boardLayout[id[0]][id[1]].setSquareSymbol();
         console.log(boardData.boardLayout[id[0]][id[1]]);
         console.log(boardData);
+
+        //Check Game Winner
+        boardData.gameOver();
+        if (boardData.gameOver() === true) {
+            console.log("game over");
+        }
+
     });
 
 
@@ -35,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let newGameButton = document.getElementById('new-game');
     newGameButton.addEventListener('click', function () {
         boardData.clearBoard();
+        console.log(boardData);
+        startGame();
         console.log(boardData);
     });
 

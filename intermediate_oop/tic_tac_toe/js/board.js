@@ -18,3 +18,15 @@ Board.prototype.clearBoard = function () {
         square.innerHTML = "";
     });
 }
+
+Board.prototype.gameOver = function () {
+    for (let i = 0; i < this.boardLayout; i++) {
+        if (board.boardLayout[i][0].symbol === "X") {
+            console.log("3 in a row");
+            return true;
+        } else {
+            console.log("not 3 in a row")
+            return false
+        }
+    }
+}
