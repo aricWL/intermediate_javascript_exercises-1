@@ -11,3 +11,10 @@ Board.prototype.buildBoard = function () {
     }
     return this.boardLayout;
 }
+
+Board.prototype.clearBoard = function () {
+    this.boardLayout = [];
+    document.querySelectorAll(".square").forEach(function (square) {
+        square.innerHTML = "";
+    });
+}

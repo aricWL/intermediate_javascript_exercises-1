@@ -32,12 +32,3 @@ function Game() {
         return this.getCurrentPlayer();
     }
 }
-
-
-const g = new Game();
-g.storePlayer();
-g.getCurrentPlayer();
-var b = new Board();
-b.buildBoard();
-b.boardLayout[0][1].setSquareSymbol();
-console.log(b.boardLayout[0][1]);

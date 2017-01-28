@@ -11,7 +11,7 @@ Square.prototype.isFree = function () {
 }
 Square.prototype.setSquareSymbol = function () {
 
-    this.symbol = g.currentPlayer.symbol;
+    this.symbol = game.currentPlayer.symbol;
     this.taken = true;
 
 }
