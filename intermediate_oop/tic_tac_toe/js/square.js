@@ -3,11 +3,8 @@ function Square() {
     this.symbol = undefined;
 }
 Square.prototype.isFree = function () {
-    if (this.taken === false) {
-        this.taken = true;
+    if (this.taken === true) {
         return true;
-    } else {
-        return false;
     }
 }
 Square.prototype.setSquareSymbol = function () {

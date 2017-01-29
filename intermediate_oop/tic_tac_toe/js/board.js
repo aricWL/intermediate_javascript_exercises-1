@@ -20,13 +20,25 @@ Board.prototype.clearBoard = function () {
 }
 
 Board.prototype.gameOver = function () {
-    for (let i = 0; i < this.boardLayout; i++) {
-        if (board.boardLayout[i][0].symbol === "X") {
-            console.log("3 in a row");
-            return true;
-        } else {
-            console.log("not 3 in a row")
-            return false
+    console.log("hi")
+    for (let i = 0; i < this.boardLayout.length; i++) {
+        if (this.boardLayout[i][0].symbol !== undefined) {
+            if (this.boardLayout[i][0].symbol === this.boardLayout[i][1].symbol && this.boardLayout[i][0].symbol === this.boardLayout[i][2].symbol) {
+                return true;
+            }
         }
     }
+    for (var i = 0; i < this.boardLayout.length; i++) {
+        if (this.boardLayout[0][i].symbol == this.boardLayout[1][i].symbol && this.boardLayout[0][i].symbol == this.boardLayout[2][i].symbol && this.boardLayout[2][i].symbol !== undefined) {
+            return true;
+        }
+    }
+    if (this.boardLayout[0][0].symbol == this.boardLayout[1][1].symbol && this.boardLayout[0][0].symbol == this.boardLayout[2][2].symbol && this.boardLayout[2][2].symbol !== undefined) {
+        return true;
+    }
+    if (this.boardLayout[0][2].symbol == this.boardLayout[1][1].symbol && this.boardLayout[0][2].symbol == this.boardLayout[2][0].symbol && this.boardLayout[2][0].symbol !== undefined) {
+        return true;
+    }
+
+    return false;
 }
