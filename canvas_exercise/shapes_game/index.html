@@ -1,47 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Shapes!!</title>
-  <link rel="stylesheet" type="text/css" href="vendor/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <script type="text/javascript" src="vendor/jquery-1.12.4.min.js"></script>
-  <script type="text/javascript" src="vendor/bootstrap.min.js"></script>
-  <script type="text/javascript" src="index.js"></script>
+    <title>Shapes!!</title>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap.min.css">
+
+    <script type="text/javascript" src="vendor/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 </head>
+
 <body>
-  <div class="container">
 
-  
-    <div class="col-xs-10 canvas-container">
-      <div id = "start-game"> Press Spacebar to Start Game</div>
-      <canvas id="shapes-game" height="750" width="800"></canvas>
-      <button id = "restart-button">RESTART GAME</button>
 
-    </div>
-    <div class="col-xs-2 scores">
-      <h1>Score</h1>
-      <h3><span id="score-val">0</span></h3>
-      <h1>Timer</h1>
-      <h3><span id="time-remaining">30</span></h3>
-      <div class="legend">
-        <h1>Legend</h1>
-        <div class="legend-contents">
-          <div class="triangle-bottomleft-red">
-          </div>
-          <h4>Left</h4>
-          <div class="white-square">
-          </div>
-          <h4>Right</h4>
-          <div class="triangle-bottomleft-black">
-            <div class="triangle-inner-white"></div>
-          </div>
-          <h4>Up</h4>
-          <div class="red-square">
-          </div>
-          <h4>Down</h4>
+
+    <div class="container">
+        <div class="col-xs-7 canvas-container">
+            <div id="start-game"> Press Spacebar to Start Game</div>
+            <canvas id="shapes-game" height="750" width="800px"></canvas>
+            <button id="restart-button">RESTART GAME</button>
+
         </div>
-      </div>
+        <div class="col-xs-2 scores">
+            <h1>Score</h1>
+            <h3><span id="score-val">0</span></h3>
+            <h1>Timer</h1>
+            <h3><span id="time-remaining">30</span></h3>
+            <div class="legend">
+                <h1>Legend</h1>
+                <div class="legend-contents">
+                    <div class="triangle-bottomleft-red">
+                    </div>
+                    <h4>Left</h4>
+                    <div class="white-square">
+                    </div>
+                    <h4>Right</h4>
+                    <div class="triangle-bottomleft-black">
+                        <div class="triangle-inner-white"></div>
+                    </div>
+                    <h4>Up</h4>
+                    <div class="red-square">
+                    </div>
+                    <h4>Down</h4>
+                </div>
+            </div>
+        </div>
+        <div id="leaderboard" class="col-xs-3 leaders">
+            <div id="firebaseui-auth-container"></div>
+        </div>
     </div>
-  </div>
+    <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+    <script type="text/javascript" src="leaderboard.js"></script>
 </body>
+
 </html>
