@@ -10,6 +10,8 @@ firebase.initializeApp(config);
 
 
 
+
+
 var uiConfig = {
     signInSuccessUrl: '/index.html',
     signInOptions: [
@@ -25,6 +27,36 @@ var uiConfig = {
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 // The start method will wait until the DOM is loaded.
 ui.start('#firebaseui-auth-container', uiConfig);
+
+
+//Loop through Users and pull user info into array to be displayed in html
+firebase.database().ref().child('users').once('value', function (snapshot) {
+    var exists = (snapshot.val() !== null);
+
+    var userDataObj = snapshot.val();
+
+    for (let key in userDataObj) {
+
+        var userData = userDataObj[key]
+        console.log(userData.score)
+        userArray.push({
+            name: userData.username,
+            highScore: userData.score
+        })
+    }
+
+}).then(function () {
+    console.log(userArray);
+    var descending = userArray.sort((a, b) => Number(a.highScore) - Number(b.highScore));
+    console.log(descending);
+    var $oList = document.getElementById('leaderboard-ol');
+    var htmlStr = ""
+    descending.forEach(function (item) {
+        htmlStr += `<li>${item.name}: ${item.highScore}`
+    })
+    $('ol').append(htmlStr);
+});
+
 
 
 
@@ -48,8 +80,14 @@ firebase.auth().onAuthStateChanged(function (user) {
                     console.log('user has logged in before!');
                     // Do something here you want to do for non-firstime users...
                 } else {
-                    console.log('user does not exist becuase they have never logged in before!');
                     // Do something here you want to do for first time users (Store data in database?)
+                    console.log('user does not exist becuase they have never logged in before!');
+                    userArray.push({
+                        name: displayName,
+                        highScore: 0
+                    });
+                    console.log(userArray)
+
                     function writeUserDataForTheFirstTime(userId, name, email) {
                         firebase.database().ref('users/' + userId).set({
                             username: name,
@@ -78,10 +116,18 @@ firebase.auth().onAuthStateChanged(function (user) {
             });
         } else {
             // User is signed out.
-
+            console.log("user is logged out");
 
         }
     },
     function (error) {
         console.log(error);
     });
+
+
+var logOut = document.getElementById("btnLogOut");
+
+logOut.addEventListener('click', e => {
+    firebase.auth().signOut();
+    console.log("log out button hit");
+});

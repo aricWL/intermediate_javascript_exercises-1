@@ -2,12 +2,19 @@ body {
     padding-bottom: 50px;
 }
 
+.container {
+    display: flex;
+    width: 100%;
+}
+
+#leaderboard {
+    width: 300px;
+}
+
 #firebaseui-auth-container {
     width: 100%;
     height: 100px;
 }
-
-.container {}
 
 .scores {
     padding: 50px;
@@ -16,49 +23,34 @@ body {
 #shapes-game {
     border: 4px solid grey;
     background-color: black;
-    margin-left: -130px
 }
 
 #restart-button {
     display: none;
-    position: absolute;
-    right: 0;
-    left: 60px;
-    margin: 0 auto;
-    top: 20vh;
-    width: 400px;
-    height: 200px;
-    color: purple;
-    background: gray;
-    text-outline: none;
-    font-size: 30px;
 }
 
-#start-game {
-    text-align: center;
+.btn {
     position: absolute;
-    right: 0;
-    left: 60px;
-    margin: 0 auto;
-    top: 20vh;
-    width: 400px;
-    height: 200px;
-    color: purple;
-    background: gray;
+    background: red;
+    top: 50px;
     text-outline: none;
-    font-size: 30px;
+    box-shadow: none;
+    border: none;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    z-index: 1000;
 }
 
 .canvas-container {
-    padding: 10px;
+    width: 800px;
     position: relative;
 }
 
-.canvas-container {
-    padding: 10px;
-}
-
 .scores {
+    width: 200px;
     padding: 10px;
     text-align: center;
 }

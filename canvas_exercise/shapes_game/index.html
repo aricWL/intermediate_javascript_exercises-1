@@ -18,13 +18,13 @@
 
 
     <div class="container">
-        <div class="col-xs-7 canvas-container">
-            <div id="start-game"> Press Spacebar to Start Game</div>
-            <canvas id="shapes-game" height="750" width="800px"></canvas>
-            <button id="restart-button">RESTART GAME</button>
+        <div class="canvas-container">
+            <button class="btn btn-primary" id="restart-button">RESTART GAME</button>
+            <button class="btn btn-primary" id="start-game"> Press Spacebar to Start Game</button>
 
+            <canvas id="shapes-game" height="750" width="800px"></canvas>
         </div>
-        <div class="col-xs-2 scores">
+        <div class="scores">
             <h1>Score</h1>
             <h3><span id="score-val">0</span></h3>
             <h1>Timer</h1>
@@ -48,8 +48,10 @@
                 </div>
             </div>
         </div>
-        <div id="leaderboard" class="col-xs-3 leaders">
+        <div id="leaderboard" class="leaders">
+            <ol id="leaderboard-ol"></ol>
             <div id="firebaseui-auth-container"></div>
+            <button class="btn btn-primary" id="btnLogOut">Log Out</button>
         </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>

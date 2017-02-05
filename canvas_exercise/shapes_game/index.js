@@ -1,4 +1,6 @@
  var score = 0;
+ //Grab user data from database will be stored here
+ var userArray = [];
 
  window.addEventListener("load", function () {
 
@@ -126,8 +128,23 @@
      }
 
 
+     //Prevent window from moving up and down on keypress
+     window.addEventListener("keypress", function (event) {
+         event.preventDefault();
+     });
 
+     var ar = [33, 34, 35, 36, 37, 38, 39, 40];
 
+     $(document).keydown(function (e) {
+         var key = e.which;
+         //console.log(key);
+         //if(key==35 || key == 36 || key == 37 || key == 39)
+         if ($.inArray(key, ar) > -1) {
+             e.preventDefault();
+             return false;
+         }
+         return true;
+     });
 
 
 
@@ -136,8 +153,9 @@
      var scoreId = document.getElementById('score-val');
      //****************************CHECK IF KEYPRESS CORRESPONDS WITH CURRENT**************************??
      window.addEventListener("keyup", function (event) {
+         event.preventDefault();
          if (event.keyCode !== 32) {
-             event.preventDefault();
+
 
              if (event.keyCode === current) {
                  scoreId.innerHTML = score += 1;
@@ -186,7 +204,8 @@
      var gameTimer;
      var shapeTimer;
      //****************SET INTERVAL ************************************//
-     window.addEventListener('keyup', function () {
+     window.addEventListener('keyup', function (e) {
+         e.preventDefault();
          if (event.keyCode === 32) {
 
 
@@ -229,6 +248,7 @@
                          console.log(userDbScore)
                          console.log(scoreId.innerHTML);
                          if (userDbScore < scoreId.innerHTML) {
+
                              firebase.database().ref().child('users').child(uid).update({
                                  score: scoreId.innerHTML
                              });
@@ -251,5 +271,7 @@
              });
 
      }
+
+
 
  });
