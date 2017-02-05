@@ -74,6 +74,12 @@ firebase.auth().onAuthStateChanged(function (user) {
             var photoURL = user.photoURL;
             var uid = user.uid;
             var providerData = user.providerData;
+
+            //if User is logged in show their name and profile-pic
+            $('#player').show();
+            $('#player-pic').attr('src', photoURL);
+            $('#player-name').text(displayName);
+
             console.log(displayName)
                 //WRITE USER DATA WHEN SIGNED IN THE FIRST TIME
             checkForFirstTime(uid);
@@ -119,6 +125,7 @@ firebase.auth().onAuthStateChanged(function (user) {
             });
         } else {
             console.log('user logged out')
+            $('#player').hide();
 
         }
     },
