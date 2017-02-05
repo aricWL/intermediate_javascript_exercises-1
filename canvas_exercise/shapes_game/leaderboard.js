@@ -124,6 +124,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 
             });
         } else {
+
+            //USER IS LOGGED OUT
             console.log('user logged out')
             $('#player').hide();
 
