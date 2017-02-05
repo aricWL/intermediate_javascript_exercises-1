@@ -32,11 +32,9 @@ ui.start('#firebaseui-auth-container', uiConfig);
 //Loop through Users and pull user info into array to be displayed in html
 firebase.database().ref().child('users').once('value', function (snapshot) {
     var exists = (snapshot.val() !== null);
-
     var userDataObj = snapshot.val();
 
     for (let key in userDataObj) {
-
         var userData = userDataObj[key]
         console.log(userData.score)
         userArray.push({
@@ -47,7 +45,7 @@ firebase.database().ref().child('users').once('value', function (snapshot) {
 
 }).then(function () {
     console.log(userArray);
-    var descending = userArray.sort((a, b) => Number(a.highScore) - Number(b.highScore));
+    var descending = userArray.sort((a, b) => Number(b.highScore) - Number(a.highScore));
     console.log(descending);
     var $oList = document.getElementById('leaderboard-ol');
     var htmlStr = ""
@@ -62,8 +60,13 @@ firebase.database().ref().child('users').once('value', function (snapshot) {
 
 
 firebase.auth().onAuthStateChanged(function (user) {
+
         if (user) {
             // User is signed in.
+            //Hide Auth Button
+            $('#firebaseui-auth-container').hide();
+            $('#btnLogOut').show();
+
 
             var displayName = user.displayName;
             var email = user.email;
@@ -109,14 +112,13 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 
 
-
+            //GET USER TOKEN
             user.getToken().then(function (accessToken) {
 
 
             });
         } else {
-            // User is signed out.
-            console.log("user is logged out");
+            console.log('user logged out')
 
         }
     },
@@ -129,5 +131,7 @@ var logOut = document.getElementById("btnLogOut");
 
 logOut.addEventListener('click', e => {
     firebase.auth().signOut();
+    $('#firebaseui-auth-container').show();
+    $('#btnLogOut').hide();
     console.log("log out button hit");
 });

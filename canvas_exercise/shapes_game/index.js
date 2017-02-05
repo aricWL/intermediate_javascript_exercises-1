@@ -228,6 +228,7 @@
 
      function updateLeaderBoard() {
          firebase.auth().onAuthStateChanged(function (user) {
+                 userArray = [];
                  if (user) {
                      // User is signed in.
 
@@ -241,29 +242,51 @@
 
 
 
+
                      //Check User Score and if Current Score is Greater then User Score in Database, User Score in Database = Current Score
 
                      firebase.database().ref().child('users').child(uid).child('score').once('value', function (snapshot) {
                          var userDbScore = snapshot.val();
-                         console.log(userDbScore)
-                         console.log(scoreId.innerHTML);
-                         if (userDbScore < scoreId.innerHTML) {
 
+
+                         if (userDbScore < score + 1) {
+                             //updating db score
                              firebase.database().ref().child('users').child(uid).update({
                                  score: scoreId.innerHTML
                              });
+                             $('ol').empty();
+
+                             //Loop through Users and pull user info into array to be displayed in html
+                             firebase.database().ref().child('users').once('value', function (snapshot) {
+                                 var exists = (snapshot.val() !== null);
+                                 var userDataObj = snapshot.val();
+
+                                 for (let key in userDataObj) {
+                                     var userData = userDataObj[key]
+                                     console.log(userData.score)
+                                     userArray.push({
+                                         name: userData.username,
+                                         highScore: userData.score
+                                     })
+                                 }
+
+                             }).then(function () {
+                                 console.log(userArray);
+                                 var descending = userArray.sort((a, b) => Number(b.highScore) - Number(a.highScore));
+                                 console.log(descending);
+                                 var $oList = document.getElementById('leaderboard-ol');
+                                 var htmlStr = ""
+                                 descending.forEach(function (item) {
+                                     htmlStr += `<li>${item.name}: ${item.highScore}`
+                                 })
+                                 $('ol').append(htmlStr);
+                             });
+
                          }
                      });
 
-
-                     user.getToken().then(function (accessToken) {
-
-
-                     });
                  } else {
                      // User is signed out.
-
-
                  }
              },
              function (error) {
